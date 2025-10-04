@@ -44,7 +44,7 @@ Ofrecer una experiencia dinámica donde los usuarios puedan seleccionar meteorit
 
 ### Prerrequisitos
 - Node.js (versión 18 o superior)
-- npm o yarn
+- npm 
 
 ### Pasos de Instalación
 
@@ -57,15 +57,11 @@ Ofrecer una experiencia dinámica donde los usuarios puedan seleccionar meteorit
 2. **Instalar dependencias**
    ```bash
    npm install
-   # o
-   yarn install
    ```
 
 3. **Ejecutar en modo desarrollo**
    ```bash
    npm run dev
-   # o
-   yarn dev
    ```
 
 4. **Abrir en el navegador**
@@ -100,50 +96,8 @@ komet/
 4. **Características**: Descubre las funcionalidades disponibles
 5. **Simulación**: Haz clic en "PROBAR KOMET" para acceder a la simulación interactiva
 
-## 🌐 Demo en Vivo
-
-[Ver Demo](https://tu-deploy-url.vercel.app) *(Actualizar con la URL real)*
-
-## 📱 Características Responsive
-
-- ✅ **Desktop**: Experiencia completa con navegación horizontal
-- ✅ **Tablet**: Layout adaptado para pantallas medianas
-- ✅ **Mobile**: Interfaz optimizada para dispositivos móviles
-- ✅ **Menú hamburguesa**: Navegación móvil intuitiva
-
-## 🎨 Diseño Visual
-
-- **Tema Espacial**: Fondo animado de estrellas
-- **Tipografía**: Fuente Orbitron para un look futurista
-- **Colores**: Paleta oscura con acentos azules, púrpuras y verdes
-- **Animaciones**: Transiciones suaves y efectos hover
-- **Efectos**: Backdrop blur y transparencias
-
-## 🤝 Contribución
-
-Las contribuciones son bienvenidas. Para contribuir:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
 
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
 
-## 👥 Equipo
-
-- **Desarrollador Principal**: [luxcas213](https://github.com/luxcas213)
-
-## 📞 Contacto
-
-- **GitHub**: [@luxcas213](https://github.com/luxcas213)
-- **Proyecto**: [Komet Frontend](https://github.com/luxcas213/Komet---Frontend)
-
----
-
-⭐ **¡No olvides dar una estrella al proyecto si te gusta!** ⭐
-
-*Hecho con ❤️ para la exploración espacial*
