@@ -3,7 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Stars } from '@react-three/drei'
 import { useRef, Suspense, useState } from 'react'
 import * as THREE from 'three'
-import { AsteroidInfo } from '@/types/asteroid'
+import { AsteroidInfo, OrbitalParams } from '@/types/asteroid'
 
 // Constantes astronómicas
 const AU = 1 // Unidad Astronómica (escalada para visualización)
@@ -12,12 +12,13 @@ const SUN_RADIUS = 0.3 // Radio del Sol escalado
 const TIME_SCALE = 50 // Aceleración de la simulación (días por segundo)
 
 // Parámetros orbitales de la Tierra
-const EARTH_ORBITAL_PARAMS = {
+const EARTH_ORBITAL_PARAMS: OrbitalParams = {
   semi_major_axis: 1.0, // 1 AU
   eccentricity: 0.0167,
   inclination: 0, // grados
   ascending_node_longitude: 0,
   perihelion_argument: 0,
+  mean_anomaly: 0, // grados
   orbital_period: 365 // días
 }
 
@@ -55,7 +56,7 @@ function getTrueAnomaly(E: number, eccentricity: number): number {
 
 // Calcula la posición 3D desde los elementos orbitales
 function getOrbitalPosition(
-  orbitalParams: any,
+  orbitalParams: OrbitalParams,
   meanAnomalyAtTime: number,
   scale: number = AU
 ): THREE.Vector3 {
@@ -96,7 +97,7 @@ function getOrbitalPosition(
 }
 
 // Genera puntos para dibujar la órbita completa
-function generateOrbitPoints(orbitalParams: any, segments: number = 128, scale: number = AU): THREE.Vector3[] {
+function generateOrbitPoints(orbitalParams: OrbitalParams, segments: number = 128, scale: number = AU): THREE.Vector3[] {
   const points: THREE.Vector3[] = []
   
   for (let i = 0; i <= segments; i++) {
@@ -109,7 +110,7 @@ function generateOrbitPoints(orbitalParams: any, segments: number = 128, scale: 
 }
 
 // Calcula la velocidad orbital en una posición específica (km/s)
-function getOrbitalVelocity(orbitalParams: any, trueAnomaly: number): number {
+function getOrbitalVelocity(orbitalParams: OrbitalParams, trueAnomaly: number): number {
   const { semi_major_axis, eccentricity } = orbitalParams
   const GM_sun = 1.327e11 // km³/s² (Constante gravitacional del Sol)
   
@@ -183,7 +184,7 @@ function Earth() {
 
 function Meteorite({ asteroidData }: { asteroidData?: AsteroidInfo | null }) {
   const meteoriteRef = useRef<THREE.Mesh>(null)
-  const [currentVelocity, setCurrentVelocity] = useState<number>(0)
+  const [_currentVelocity, setCurrentVelocity] = useState<number>(0)
   
   useFrame(({ clock }) => {
     if (meteoriteRef.current && asteroidData) {
@@ -245,7 +246,7 @@ function Meteorite({ asteroidData }: { asteroidData?: AsteroidInfo | null }) {
 function Sun() {
   const sunRef = useRef<THREE.Mesh>(null)
   
-  useFrame(({ clock }) => {
+  useFrame(() => {
     if (sunRef.current) {
       sunRef.current.rotation.y += 0.005 // Rotación lenta del Sol
     }
