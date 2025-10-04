@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function HomePage() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
     <div className="relative w-full bg-black">
       {/* Header */}
@@ -56,12 +58,67 @@ export default function HomePage() {
               </Link>
             </nav>
 
-            {/* Menú móvil  */}
-            <button className="md:hidden text-white">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+            {/* Botón menú móvil */}
+            <button 
+              className="md:hidden text-white p-2 hover:bg-gray-800 rounded-lg transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
+          </div>
+
+          {/* Menú móvil desplegable */}
+          <div className={`md:hidden transition-all duration-300 ease-in-out ${
+            isMobileMenuOpen 
+              ? 'max-h-96 opacity-100 border-t border-gray-800/50' 
+              : 'max-h-0 opacity-0 overflow-hidden'
+          }`}>
+            <nav className="px-6 py-4 space-y-4 bg-black/90 backdrop-blur-md">
+              <a
+                href="#inicio"
+                className="block text-gray-300 hover:text-white transition-colors duration-300 py-2 border-b border-gray-800/50"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Inicio
+              </a>
+              <a
+                href="#sobre"
+                className="block text-gray-300 hover:text-white transition-colors duration-300 py-2 border-b border-gray-800/50"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Sobre KOMET
+              </a>
+              <a
+                href="#objetivos"
+                className="block text-gray-300 hover:text-white transition-colors duration-300 py-2 border-b border-gray-800/50"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Objetivos
+              </a>
+              <a
+                href="#caracteristicas"
+                className="block text-gray-300 hover:text-white transition-colors duration-300 py-2 border-b border-gray-800/50"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Características
+              </a>
+              <Link
+                href="/simulation"
+                className="block bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center px-6 py-3 rounded-full hover:from-blue-500 hover:to-purple-500 transition-all duration-300 shadow-lg hover:shadow-blue-500/25 mt-4"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Simular
+              </Link>
+            </nav>
           </div>
         </div>
       </header>
@@ -78,35 +135,35 @@ export default function HomePage() {
       </div>
 
       {/* Logo centrado */}
-      <div id="inicio" className="relative z-10 flex flex-col items-center justify-center h-screen text-center">
-        <h1 className="text-6xl md:text-9xl font-bold text-white mb-4">
+      <div id="inicio" className="relative z-10 flex flex-col items-center justify-center h-screen text-center px-4">
+        <h1 className="text-4xl sm:text-6xl md:text-9xl font-bold text-white mb-4">
           KOMET
         </h1>
-        <h6 className="text-lg md:text-2xl text-gray-300">
+        <h6 className="text-base sm:text-lg md:text-2xl text-gray-300">
           Observa, Simula, Impacta
         </h6>
       </div>
 
       {/* Sección Sobre el Proyecto */}
-      <div id="sobre" className="relative z-10 min-h-screen flex items-center justify-center px-6 pt-20">
+      <div id="sobre" className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20">
         <div className="max-w-6xl mx-auto w-full">
-          <h2 className="text-4xl md:text-6xl font-bold text-white text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white text-center mb-8 sm:mb-12">
             Sobre Komet
           </h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h3 className="text-2xl md:text-3xl font-semibold text-blue-400">
+          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
+            <div className="space-y-4 sm:space-y-6">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-blue-400">
                 Simulación Interactiva de Meteoritos
               </h3>
-              <p className="text-lg text-gray-300 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                 Komet es un proyecto innovador que permite explorar y simular el comportamiento de meteoritos en un entorno 3D interactivo.
               </p>
-              <p className="text-lg text-gray-300 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                 Los usuarios pueden seleccionar meteoritos basados en datos reales y simular su trayectoria e impacto hacia la Tierra. Komet destaca por combinar precisión científica con visualización en tiempo real, ofreciendo una simulación interactiva y educativa que permite explorar diferentes escenarios de manera dinámica.
               </p>
             </div>
-            <div className="bg-gray-900/70 backdrop-blur-sm rounded-lg p-8 text-center border border-gray-700/30">
-              <div className="relative w-full h-64 rounded-lg overflow-hidden mb-4 border border-gray-600/20">
+            <div className="bg-gray-900/70 backdrop-blur-sm rounded-lg p-4 sm:p-8 text-center border border-gray-700/30">
+              <div className="relative w-full h-48 sm:h-64 rounded-lg overflow-hidden mb-4 border border-gray-600/20">
                 <Image
                   src="/meteorito_landing.png"
                   alt="Simulación Interactiva de Meteoritos"
@@ -115,7 +172,7 @@ export default function HomePage() {
                   className="rounded-lg"
                 />
               </div>
-              <p className="text-gray-300 text-sm leading-relaxed">
+              <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
                 Meteorito Hoba, el meteorito más grande conocido, en Namibia.
               </p>
             </div>
@@ -124,41 +181,41 @@ export default function HomePage() {
       </div>
 
       {/* Sección Objetivos */}
-      <div id="objetivos" className="relative z-10 min-h-screen flex items-center justify-center px-6 pt-20">
+      <div id="objetivos" className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20">
         <div className="max-w-6xl mx-auto w-full">
-          <h2 className="text-4xl md:text-6xl font-bold text-white text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white text-center mb-8 sm:mb-16">
             Nuestros Objetivos
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-8 items-stretch">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
             {/* Columna izquierda - Objetivos principales */}
-            <div className="space-y-6">
-              <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-6 border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 h-[180px] flex flex-col">
-                <div className="flex items-start space-x-4 flex-1">
-                  <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-blue-400 text-lg">🎯</span>
+            <div className="space-y-4 sm:space-y-6">
+              <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 min-h-[160px] sm:h-[180px] flex flex-col">
+                <div className="flex items-start space-x-3 sm:space-x-4 flex-1">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-blue-400 text-base sm:text-lg">🎯</span>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-blue-400 mb-2">
+                    <h3 className="text-base sm:text-lg font-semibold text-blue-400 mb-2">
                       OBJETIVO PRINCIPAL
                     </h3>
-                    <p className="text-gray-300 text-sm leading-relaxed">
+                    <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
                       Permitir a los usuarios explorar y simular meteoritos y planetas en 3D, visualizando sus trayectorias e impactos de manera realista e interactiva.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 h-[180px] flex flex-col">
-                <div className="flex items-start space-x-4 flex-1">
-                  <div className="w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-purple-400 text-lg">📚</span>
+              <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 min-h-[160px] sm:h-[180px] flex flex-col">
+                <div className="flex items-start space-x-3 sm:space-x-4 flex-1">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-purple-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-purple-400 text-base sm:text-lg">📚</span>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-purple-400 mb-2">
+                    <h3 className="text-base sm:text-lg font-semibold text-purple-400 mb-2">
                       OBJETIVO EDUCATIVO
                     </h3>
-                    <p className="text-gray-300 text-sm leading-relaxed">
+                    <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
                       Ayudar a los usuarios a aprender sobre astronomía mediante datos reales de meteoritos y planetas, combinando ciencia con visualización interactiva.
                     </p>
                   </div>
@@ -167,33 +224,33 @@ export default function HomePage() {
             </div>
 
             {/* Columna derecha - Lo que queremos mostrar */}
-            <div className="space-y-6">
-              <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-6 border border-green-500/20 hover:border-green-400/40 transition-all duration-300 h-[180px] flex flex-col">
-                <div className="flex items-start space-x-4 flex-1">
-                  <div className="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-green-400 text-lg">🌟</span>
+            <div className="space-y-4 sm:space-y-6">
+              <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-green-500/20 hover:border-green-400/40 transition-all duration-300 min-h-[160px] sm:h-[180px] flex flex-col">
+                <div className="flex items-start space-x-3 sm:space-x-4 flex-1">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-green-400 text-base sm:text-lg">🌟</span>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-green-400 mb-2">
+                    <h3 className="text-base sm:text-lg font-semibold text-green-400 mb-2">
                       QUÉ QUEREMOS MOSTRAR
                     </h3>
-                    <p className="text-gray-300 text-sm leading-relaxed">
+                    <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
                       Mostrar meteoritos reales y sus trayectorias, incluyendo animaciones de impactos y movimientos orbitales para ofrecer un contexto completo del espacio.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-6 border border-orange-500/20 hover:border-orange-400/40 transition-all duration-300 h-[180px] flex flex-col">
-                <div className="flex items-start space-x-4 flex-1">
-                  <div className="w-10 h-10 bg-orange-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-orange-400 text-lg">🚀</span>
+              <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-orange-500/20 hover:border-orange-400/40 transition-all duration-300 min-h-[160px] sm:h-[180px] flex flex-col">
+                <div className="flex items-start space-x-3 sm:space-x-4 flex-1">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-orange-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-orange-400 text-base sm:text-lg">🚀</span>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-orange-400 mb-2">
+                    <h3 className="text-base sm:text-lg font-semibold text-orange-400 mb-2">
                       EXPERIENCIA INTERACTIVA
                     </h3>
-                    <p className="text-gray-300 text-sm leading-relaxed">
+                    <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
                       Ofrecer una experiencia dinámica donde los usuarios puedan seleccionar meteoritos, ajustar parámetros y ver simulaciones en tiempo real, con controles de cámara y navegación intuitiva.
                     </p>
                   </div>
@@ -207,47 +264,47 @@ export default function HomePage() {
       </div>
 
       {/* Sección Características */}
-      <div id="caracteristicas" className="relative z-10 min-h-screen flex items-center justify-center px-6 pt-20">
+      <div id="caracteristicas" className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20">
         <div className="max-w-6xl mx-auto w-full">
-          <h2 className="text-4xl md:text-6xl font-bold text-white text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white text-center mb-8 sm:mb-16">
             Características
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {/* Característica 1 */}
-            <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-700/30">
-              <div className="w-20 h-20 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-blue-400 text-2xl">🌟</span>
+            <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-6 sm:p-8 text-center border border-gray-700/30">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                <span className="text-blue-400 text-xl sm:text-2xl">🌟</span>
               </div>
-              <h3 className="text-3xl font-semibold text-white mb-4">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-3 sm:mb-4">
                 Interactivo
               </h3>
-              <p className="text-gray-300">
+              <p className="text-sm sm:text-base text-gray-300">
                 Los usuarios pueden seleccionar meteoritos y ver simulaciones en tiempo real, creando una experiencia dinámica y envolvente.
               </p>
             </div>
 
             {/* Característica 2 */}
-            <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-700/30">
-              <div className="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-purple-400 text-2xl">🚀</span>
+            <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-6 sm:p-8 text-center border border-gray-700/30">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                <span className="text-purple-400 text-xl sm:text-2xl">🚀</span>
               </div>
-              <h3 className="text-3xl font-semibold text-white mb-4">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-3 sm:mb-4">
                 Educativo
               </h3>
-              <p className="text-gray-300">
+              <p className="text-sm sm:text-base text-gray-300">
                 Komet ofrece información detallada sobre cada meteorito y una simulacion de su impacto, fomentando el aprendizaje y la curiosidad científica.
               </p>
             </div>
 
             {/* Característica 3 */}
-            <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-700/30">
-              <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-green-400 text-2xl">🌌</span>
+            <div className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-6 sm:p-8 text-center border border-gray-700/30 sm:col-span-2 md:col-span-1">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                <span className="text-green-400 text-xl sm:text-2xl">🌌</span>
               </div>
-              <h3 className="text-3xl font-semibold text-white mb-4">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-3 sm:mb-4">
                 Realista
               </h3>
-              <p className="text-gray-300">
+              <p className="text-sm sm:text-base text-gray-300">
                 Komet utiliza datos reales de meteoritos y simulaciones precisas para ofrecer una experiencia auténtica y educativa.
               </p>
             </div>
@@ -256,25 +313,25 @@ export default function HomePage() {
       </div>
 
       {/* Sección Call to Action */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center w-full">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
             ¿Listo para explorar?
           </h2>
-          <p className="text-l text-gray-300 mb-12">
+          <p className="text-base sm:text-lg text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto">
             Simula meteoritos, observa su trayectoria y descubre el impacto en la Tierra.
           </p>
           
           {/* Botón PROBAR */}
           <Link href="/simulation">
-            <button className="group relative px-12 py-6 text-2xl font-bold text-white bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 rounded-full hover:from-blue-500 hover:via-purple-500 hover:to-blue-700 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25 transform hover:scale-105">
+            <button className="group relative px-8 py-4 sm:px-12 sm:py-6 text-lg sm:text-2xl font-bold text-white bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 rounded-full hover:from-blue-500 hover:via-purple-500 hover:to-blue-700 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25 transform hover:scale-105">
               <span className="relative z-10">PROBAR KOMET</span>
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               <div className="absolute inset-0 rounded-full animate-pulse bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 opacity-30"></div>
             </button>
           </Link>
           
-          <p className="text-sm text-gray-500 mt-6">
+          <p className="text-xs sm:text-sm text-gray-500 mt-4 sm:mt-6">
             Haz clic para comenzar tu simulacion e impactar la Tierra.
           </p>
         </div>
