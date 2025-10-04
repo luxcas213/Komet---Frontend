@@ -234,7 +234,7 @@ function Meteorite({ asteroidData }: { asteroidData?: AsteroidInfo | null }) {
       <mesh ref={meteoriteRef}>
         <sphereGeometry args={[asteroidRadius, 16, 16]} />
         <meshStandardMaterial 
-          color={asteroidData.is_hazardous ? "#FF4444" : "#8B4513"}
+          color="#FF8C00"
           roughness={0.9}
           metalness={0.2}
         />
