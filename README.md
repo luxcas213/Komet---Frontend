@@ -4,7 +4,7 @@
 
 Komet es un proyecto innovador que permite explorar y simular el comportamiento de meteoritos en un entorno 3D interactivo, combinando precisión científica con visualización en tiempo real.
 
-![Komet Logo](public/logo.png)
+![Komet Logo](/komet/public/logo.png)
 
 ## 🎯 Descripción del Proyecto
 
