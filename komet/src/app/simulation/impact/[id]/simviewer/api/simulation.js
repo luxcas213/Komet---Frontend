@@ -1,7 +1,7 @@
 
 const url = `http://localhost:4000/api`;
 
-export async function runSimulation(dx, dy, dz, vx, vy, vz, mass) {
+export async function runSimulation(asteroid) {
     try {
         const res = await fetch(url + "/runsimulation", {
             method: 'POST',
@@ -9,13 +9,13 @@ export async function runSimulation(dx, dy, dz, vx, vy, vz, mass) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ 
-                dx: dx,
-                dy: dy,
-                dz: dz,
-                vx: vx,
-                vy: vy,
-                vz: vz,
-                mass: mass
+                dx: asteroid.pos[0],
+                dy: asteroid.pos[1],
+                dz: asteroid.pos[2],
+                vx: asteroid.vel[0],
+                vy: asteroid.vel[1],
+                vz: asteroid.vel[2],
+                mass: asteroid.mass
             })
         });
 
