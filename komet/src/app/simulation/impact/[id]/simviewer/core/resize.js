@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 
 export function resizeHandler(renderer, camera, composer, bloomPass) {
     window.addEventListener('resize', () => {

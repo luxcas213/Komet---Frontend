@@ -6,7 +6,7 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
 export function createComposer(canvas, scene, camera) {
-    const renderer = createRenderer(canvas);
+    const {renderer, dispose} = createRenderer(canvas);
     const composer = new EffectComposer(renderer);
     composer.addPass(new RenderPass(scene, camera));
     const bloomPass = new UnrealBloomPass(
@@ -16,5 +16,5 @@ export function createComposer(canvas, scene, camera) {
         0.2    // threshold
     );
     composer.addPass(bloomPass);
-    return {composer, bloomPass, renderer};
+    return {composer, bloomPass, renderer, dispose};
 }
