@@ -43,58 +43,93 @@ export default function ConsecuenciasPage() {
     const params = useParams();
     const { id } = (params || {}) as { id?: string };
     const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState<ConsequencesData | null>(null);
 
-    // const [data, setData] = useState<ConsequencesData | null>(null);
-
-    // useEffect(() => {
-    //     if (!id) return;
-    //     const stored = localStorage.getItem(`simData-${id}`);
-    //     if (stored) {
-    //         try {
-    //             setData(JSON.parse(stored));
-    //             setIsLoading(false);
-    //         } catch {
-    //             setData(null);
-    //             setIsLoading(false);
-    //         }
-    //     }
-    // }, [id]);
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await fetch("http://localhost:8000/predict/predict", {
-    //                 method: "POST",
-    //                 headers: { "Content-Type": "application/json" },
-    //                 body: JSON.stringify({
-    //                     mass: 1000000,
-    //                     velocity: 20000,
-    //                     latitude: 40.7128,
-    //                     longitude: -74.0060,
-    //                 }),
-    //             });
-    //             if (!response.ok) throw new Error("Network response was not ok");
-    //             const result = await response.json();
-    //             setData(result);
-    //         } catch (error) {
-    //             setData(null);
-    //         } finally {
-    //             setIsLoading(false);
-    //         }
-    //     };
-    //     fetchData();
-    // }, []);
-    // if (!data) return null;
-
-    const data = exampleData;
     useEffect(() => {
-        // Simular carga de 2 segundos
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 2000);
+        const fetchPrediction = async () => {
+            setIsLoading(true);
 
-        return () => clearTimeout(timer);
-    }, []);
+            // Valores por defecto si no hay nada en localStorage
+            let payload = {
+                mass: 50000,
+                velocity: 15000,
+                latitude: 35.6762,
+                longitude: 139.6503
+            };
+
+            try {
+                // Intentar obtener datos del localStorage
+                const storedData = localStorage.getItem(`simData-${id}`);
+                
+                if (storedData) {
+                    const parsed = JSON.parse(storedData);
+                    
+                    // La estructura de simData tiene matches[], tomamos el primer match
+                    if (parsed.matches && parsed.matches.length > 0) {
+                        const firstMatch = parsed.matches[0];
+                        
+                        // Extraer datos del best_hypothetical
+                        if (firstMatch.best_hypothetical) {
+                            payload.mass = firstMatch.best_hypothetical.mass_kg_estimate || payload.mass;
+                            payload.latitude = firstMatch.best_hypothetical.impact_lat_deg || payload.latitude;
+                            payload.longitude = firstMatch.best_hypothetical.impact_lon_deg || payload.longitude;
+                        }
+                        
+                        // Extraer velocidad (convertir de km/s a m/s)
+                        if (firstMatch.rel_speed_km_s_estimate) {
+                            payload.velocity = firstMatch.rel_speed_km_s_estimate * 1000;
+                        }
+                    }
+                }
+            } catch (e) {
+                console.warn('Error al leer localStorage, usando valores por defecto', e);
+            }
+
+            try {
+                const response = await fetch("https://komet-ml.onrender.com/predict/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                });
+
+                if (!response.ok) throw new Error("Network response was not ok");
+                
+                const result = await response.json();
+
+                if (result && result.success) {
+                    const mapped: ConsequencesData = {
+                        magnitude: result.magnitude,
+                        energy: result.energy,
+                        alert_level: result.alert_level,
+                        intensity_mmi: result.intensity_mmi,
+                        community_intensity_cdi: result.community_intensity_cdi,
+                        significance: result.significance,
+                        depth: result.depth,
+                        tsunami_warning: result.tsunami_warning,
+                        location: result.location,
+                        asteroid_properties: result.asteroid_properties,
+                        message: result.message,
+                    };
+                    setData(mapped);
+                    
+                    // Guardar en localStorage para uso posterior
+                    if (id) {
+                        localStorage.setItem(`simData-${id}`, JSON.stringify(mapped));
+                    }
+                } else {
+                    console.warn('La API no devolvió success, usando datos de ejemplo');
+                    setData(exampleData);
+                }
+            } catch (error) {
+                console.error('Error al hacer fetch a la API, usando datos de ejemplo', error);
+                setData(exampleData);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchPrediction();
+    }, [id]);
 
     if (isLoading) {
         return (
@@ -102,6 +137,16 @@ export default function ConsecuenciasPage() {
                 <div className="text-center">
                     <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-sky-400 mb-4"></div>
                     <p className="text-lg text-foreground/70">Cargando consecuencias del impacto...</p>
+                </div>
+            </main>
+        );
+    }
+
+    if (!data) {
+        return (
+            <main className="max-w-5xl mx-auto p-6 text-foreground min-h-screen flex items-center justify-center">
+                <div className="text-center">
+                    <p className="text-lg text-foreground/70">No hay datos disponibles</p>
                 </div>
             </main>
         );
