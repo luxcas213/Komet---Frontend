@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 type ConsequencesData = {
     magnitude: number;
@@ -42,8 +42,13 @@ export default function ConsecuenciasPage() {
 
     const params = useParams();
     const { id } = (params || {}) as { id?: string };
+    const router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState<ConsequencesData | null>(null);
+
+    const handleGoBack = () => {
+        router.back();
+    };
 
     useEffect(() => {
         const fetchPrediction = async () => {
@@ -160,6 +165,25 @@ export default function ConsecuenciasPage() {
                     to { opacity: 1; transform: translateY(0); }
                 }
             `}</style>
+            
+            {/* Botón Volver */}
+            <div className="mb-4">
+                <button
+                    onClick={handleGoBack}
+                    className="cursor-pointer bg-black/50 hover:bg-black/70 text-white px-4 py-2 rounded-lg backdrop-blur-sm transition-all duration-300 flex items-center gap-2 border border-white/20 hover:border-white/40 hover:scale-105 hover:shadow-lg group"
+                >
+                    <svg 
+                        className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span className="transition-all duration-300 group-hover:font-semibold">Volver</span>
+                </button>
+            </div>
+
             <header className="mb-6">
                 <h1 className="text-3xl font-bold">Consecuencias</h1>
                 <p className="text-sm text-foreground/70">Detalles predictivos del impacto y propiedades del asteroide</p>
