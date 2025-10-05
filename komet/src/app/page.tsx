@@ -156,10 +156,10 @@ export default function HomePage() {
                 Simulación Interactiva de Meteoritos
               </h3>
               <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                Komet es un proyecto innovador que permite explorar y simular el comportamiento de meteoritos en un entorno 3D interactivo.
+                Komet es una plataforma web educativa e interactiva que permite explorar y simular el comportamiento de meteoritos.
               </p>
               <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                Los usuarios pueden seleccionar meteoritos basados en datos reales y simular su trayectoria e impacto hacia la Tierra. Komet destaca por combinar precisión científica con visualización en tiempo real, ofreciendo una simulación interactiva y educativa que permite explorar diferentes escenarios de manera dinámica.
+                La web combina datos reales obtenidos de las APIs de NASA de NEO con simulaciones 3D generadas mediante cálculos matemáticos y algoritmos, proporcionando información clara sobre órbitas, posibles impactos y sus consecuencias, ayudando a entender estos meteoritos de forma fácil y accesible. 
               </p>
             </div>
             <div className="bg-gray-900/70 backdrop-blur-sm rounded-lg p-4 sm:p-8 text-center border border-gray-700/30">
@@ -200,7 +200,8 @@ export default function HomePage() {
                       OBJETIVO PRINCIPAL
                     </h3>
                     <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
-                      Permitir a los usuarios explorar y simular meteoritos y planetas en 3D, visualizando sus trayectorias e impactos de manera realista e interactiva.
+                      Permitir a los usuarios explorar y simular meteoritos y sus consecuencias en 3D, visualizando sus trayectorias e impactos de manera realista e interactiva.
+                      permitiendo aprender, explorar y entender estos fenómenos de manera sencilla e interactiva. 
                     </p>
                   </div>
                 </div>
@@ -216,7 +217,7 @@ export default function HomePage() {
                       OBJETIVO EDUCATIVO
                     </h3>
                     <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
-                      Ayudar a los usuarios a aprender sobre astronomía mediante datos reales de meteoritos y planetas, combinando ciencia con visualización interactiva.
+                      Ayudar a los usuarios a aprender sobre astronomía mediante datos reales de meteoritos, combinando ciencia con visualización interactiva y divertida.
                     </p>
                   </div>
                 </div>
@@ -235,7 +236,7 @@ export default function HomePage() {
                       QUÉ QUEREMOS MOSTRAR
                     </h3>
                     <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
-                      Mostrar meteoritos reales y sus trayectorias, incluyendo animaciones de impactos y movimientos orbitales para ofrecer un contexto completo del espacio.
+                      Mostrar meteoritos reales y sus trayectorias, incluyendo animaciones de impactos y movimientos orbitales para ofrecer un contexto completo del espacio y sus consecuencias en la tierra. todo en un entorno sencillo y adaptado para todos los usuarios.
                     </p>
                   </div>
                 </div>
@@ -251,7 +252,7 @@ export default function HomePage() {
                       EXPERIENCIA INTERACTIVA
                     </h3>
                     <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
-                      Ofrecer una experiencia dinámica donde los usuarios puedan seleccionar meteoritos, ajustar parámetros y ver simulaciones en tiempo real, con controles de cámara y navegación intuitiva.
+                      Ofrecer una experiencia dinámica donde los usuarios puedan seleccionar meteoritos, ver simulaciones en tiempo real, con controles de cámara y navegación intuitiva y aprender y analizar datos de manera sencilla.
                     </p>
                   </div>
                 </div>
@@ -292,7 +293,7 @@ export default function HomePage() {
                 Educativo
               </h3>
               <p className="text-sm sm:text-base text-gray-300">
-                Komet ofrece información detallada sobre cada meteorito y una simulacion de su impacto, fomentando el aprendizaje y la curiosidad científica.
+                Komet ofrece información detallada sobre cada meteorito y una simulacion de su impacto,y analisis de sus concecuencias, fomentando el aprendizaje y la curiosidad científica.
               </p>
             </div>
 
@@ -305,7 +306,7 @@ export default function HomePage() {
                 Realista
               </h3>
               <p className="text-sm sm:text-base text-gray-300">
-                Komet utiliza datos reales de meteoritos y simulaciones precisas para ofrecer una experiencia auténtica y educativa.
+                Komet utiliza datos reales de meteoritos y simulaciones precisas para ofrecer una experiencia auténtica, unica y educativa.
               </p>
             </div>
           </div>
