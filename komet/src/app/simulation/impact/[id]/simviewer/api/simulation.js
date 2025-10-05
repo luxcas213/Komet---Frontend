@@ -1,5 +1,5 @@
 
-const url = `http://localhost:4000/api`;
+const url = `https://komet-backend-phi.vercel.app/api`;
 
 export async function runSimulation(asteroid) {
     try {

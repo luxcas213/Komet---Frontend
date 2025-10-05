@@ -140,7 +140,7 @@ export default function HomePage() {
           KOMET
         </h1>
         <h6 className="text-base sm:text-lg md:text-2xl text-gray-300">
-          Observa, Simula, Impacta
+          Observá, Simulá, Impactá
         </h6>
       </div>
 

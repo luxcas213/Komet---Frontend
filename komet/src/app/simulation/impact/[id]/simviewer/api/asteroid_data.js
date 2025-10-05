@@ -1,6 +1,6 @@
 
 export async function getData(id){
-    const url = `http://localhost:4000/api/asteroidsimdata/${id}`
+    const url = `https://komet-backend-phi.vercel.app/api/asteroidsimdata/${id}`
     try {
         const res = await fetch(url);
         if(!res.ok) throw new Error('Failed to fetch asteroid data');

@@ -58,10 +58,11 @@ export default function ImpactSimulation() {
     const fetchSimData = async () => {
       try {
         setLoading(true);
-        const URL_SIMDATA = `http://localhost:4000/api/asteroidsimdata/${id}`;
+        const URL_SIMDATA = `https://komet-backend-phi.vercel.app/api/asteroidsimdata/${id}`;
         const response = await fetch(URL_SIMDATA);
         const data = await response.json();
         setSimData(data);
+        localStorage.setItem(`simData-${id}`, JSON.stringify(data));
       } catch (error) {
         console.error('Error fetching simulation data:', error);
       } finally {
@@ -296,15 +297,15 @@ export default function ImpactSimulation() {
                 </button>
               </Link>
 
-              <button
+                <Link href="/consecuencias/[id]" as={`/simulation/consecuencias/${id}`}
                 onClick={() => {
                   try { mainInstanceRef.current?.unloadTrajectory(); } catch (e) {}
                   setEndingOpen(false);
                 }}
                 className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
-              >
+                >
                 Ver consecuencias
-              </button>
+                </Link>
             </div>
           </div>
         </div>
