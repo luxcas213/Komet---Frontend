@@ -148,7 +148,7 @@ export default function HomePage() {
       <div id="sobre" className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20">
         <div className="max-w-6xl mx-auto w-full">
           <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white text-center mb-8 sm:mb-12">
-            Sobre Komet
+            Sobre KOMET
           </h2>
           <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div className="space-y-4 sm:space-y-6">
